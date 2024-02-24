@@ -1,26 +1,25 @@
 import HealthCheckStatusEnum from "./health_check_enum"
 
-class HealthCheckEntityModel {
-    alias: string
-    status: HealthCheckStatusEnum = HealthCheckStatusEnum.HEALTHY
+export class HealthCheckEntityModel {
+    readonly alias: string
+    readonly tags: Array<string>
+    status: HealthCheckStatusEnum
     timeTaken?: string
-    tags: Array<string>
 
-    constructor(alias: string, tags:Array<string>){
+    constructor(alias: string, tags: Array<string>) {
+        this.status = HealthCheckStatusEnum.HEALTHY;
         this.alias = alias;
         this.tags = tags;
     }
 }
 
-class HealthCheckModel {
+export class HealthCheckModel {
+    entities: Array<HealthCheckEntityModel>
     status: HealthCheckStatusEnum
     totalTimeTaken?: string
-    entities: Array<HealthCheckEntityModel>
 
     constructor() {
         this.status = HealthCheckStatusEnum.HEALTHY;
         this.entities = [];
     }
 }
-
-export { HealthCheckEntityModel, HealthCheckModel }
